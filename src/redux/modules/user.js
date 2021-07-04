@@ -102,7 +102,7 @@ const logoutFB = () => {
     return function (dispatch, getState, {history}){
         auth.signOut().then(() => {
             dispatch(logOut());
-            history.replace("/")// replace는 현재 페이지와 () 괄호안에 있는 페이지와 바꿀때 사용한다. 
+            history.replace("/login")// replace는 현재 페이지와 () 괄호안에 있는 페이지와 바꿀때 사용한다. 
         })
     }
 }

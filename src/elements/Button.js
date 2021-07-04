@@ -3,22 +3,32 @@ import styled from 'styled-components';
 
 const Button = (props) => {
 
-    const {text, _onClick, color} = props
+    const {text, _onClick, color, is_float, children} = props
 
     const styles = {
         color:color
     }
+    if(is_float){
+        return (
+            <React.Fragment>
+                <PlusBtn {...styles} onClick={_onClick}>{text? text:children}</PlusBtn>
+            </React.Fragment>
+        )
+    }
+
     return (
         <React.Fragment>
-            <ElButton {...styles} onClick={_onClick}>{text}</ElButton>
+            <ElButton {...styles} onClick={_onClick}>{text? text:children}</ElButton>
         </React.Fragment>
     )
 }
 
 Button.defaultProps = {
-    text:"텍스트",
+    children:null,
+    text: false,
     _onClick:() => {},
-    color:"white"
+    color:"white",
+    is_float:false
 }
 
 const ElButton = styled.button`
@@ -29,5 +39,16 @@ const ElButton = styled.button`
     box-sizing:border-box;
     border:none;
 `
-
+const PlusBtn = styled.div`
+    background-color: ${(props) =>props.color};
+   width:50px;
+   height:50px;
+   display: flex;
+   justify-content:center;
+   align-items:center;
+   border-radius: 50%;
+   position: absolute;
+   right: 30px;
+   top: 380px;
+`
 export default Button;
